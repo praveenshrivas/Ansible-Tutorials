@@ -1,0 +1,13 @@
+---
+- name: Copying files to remote
+  hosts: all
+
+  tasks:
+  - name: Copy files
+    copy:
+      src: /root/myfile.yml
+      dest: /tmp/
+      owner: praveen
+      group: praveen
+      mode: ugo=rw
+      backup: true
