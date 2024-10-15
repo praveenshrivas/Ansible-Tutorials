@@ -1,0 +1,14 @@
+---
+- name: User Management
+  hosts: all
+
+  tasks:
+  - name: User Creation
+    user:
+      name: "{{ item }}"
+      comment: new user adding for QA Team
+      shell: /bin/bash
+    loop:
+      - Praveen
+      - Paras
+      - Ankit
