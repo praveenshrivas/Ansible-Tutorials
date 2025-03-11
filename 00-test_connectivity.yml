@@ -1,9 +1,12 @@
 ---
-- name: First Basic PB
+- name: First Basic Playbook
   hosts: all
+  become: yes
 
   tasks:
-  - name: Test Connectivity
-    ping:
-  - name: "Print Output"
-    debug: msg="Alright!!"
+    - name: Test connectivity
+      ping:
+
+    - name: Print Output
+      debug:
+        msg: "Hello from Ansible"
