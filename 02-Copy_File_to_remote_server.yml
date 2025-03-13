@@ -1,13 +1,14 @@
 ---
-- name: Copying files to remote
+- name: Copying a file to remote systems
   hosts: all
+  become: yes
 
   tasks:
-  - name: Copy files
-    copy:
-      src: /root/myfile.yml
-      dest: /tmp/
-      owner: praveen
-      group: praveen
-      mode: ugo=rw
-      backup: true
+    - name: Creating the file and copying it to the destination
+      copy:
+        src: /home/text.yaml
+        dest: /tmp/
+        owner: root
+        group: root
+        mode: "0644"
+        backup: yes
