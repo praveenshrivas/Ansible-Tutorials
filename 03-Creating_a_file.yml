@@ -1,17 +1,21 @@
 ---
 - name: File Module
   hosts: all
+  become: yes  # Ensure root privileges for setting ownership and permissions
 
   tasks:
-  - name: Creating a file
-    file:
-      path: /tmp/newfile.yml
-      state: present
-      owner: praveen
-      group: praveen
-      mode: u=rwx,g=rw,o=r
+    - name: Creating a file
+      file:
+        path: /tmp/newfile.yml
+        state: touch  # 'touch' ensures the file exists
+        owner: praveen
+        group: praveen
+        mode: "0754"  # Octal notation (u=rwx,g=rw,o=r)
 
-  - name: Creating a directory
-    file:
-      path: /tmp/myfolder
-      state: present
+    - name: Creating a directory
+      file:
+        path: /tmp/myfolder
+        state: directory
+        owner: praveen
+        group: praveen
+        mode: "0755"  # Standard directory permission (rwxr-xr-x)
