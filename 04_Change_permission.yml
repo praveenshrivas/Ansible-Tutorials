@@ -1,9 +1,10 @@
 ---
-- name: change permissions
+- name: Change file permissions
   hosts: all
+  become: yes  # Needed if modifying files owned by root
 
   tasks:
-  - name: change permission
-    file:
-      path: /tmp/myfile.yml
-      mode: u=r,g=rw
+    - name: Change permission using octal mode
+      file:
+        path: /tmp/myfile.yml
+        mode: "0640"  # Equivalent to u=r, g=rw, o= (no permissions)
