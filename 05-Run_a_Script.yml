@@ -1,12 +1,23 @@
 ---
-- name: Copy and run a script
+- name: Copy the script from local to remote host and execute it
   hosts: all
+  become: yes
+
   tasks:
-    - name: Copy script to remote host
+    - name: Copy the script to the destination
       copy:
-        src: test.sh  # Local script path
-        dest: /tmp/test.sh  # Remote destination
-        mode: '0755'  # Ensure the script is executable
+        src: /home/test.sh
+        dest: /tmp/test.sh
+        owner: praveen
+        group: praveen
+        mode: "0755"
+        backup: yes
+      tags:
+        - copy
+        - script
 
     - name: Execute the script
       shell: /tmp/test.sh
+      tags:
+        - execute
+        - script
