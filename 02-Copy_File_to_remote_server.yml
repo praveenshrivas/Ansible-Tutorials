@@ -4,7 +4,7 @@
   become: yes
 
   tasks:
-    - name: Creating the file and copying it to the destination
+    - name: Copying the existing file to the destination.
       copy:
         src: /home/text.yaml
         dest: /tmp/
