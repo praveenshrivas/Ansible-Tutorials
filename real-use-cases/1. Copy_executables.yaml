@@ -1,0 +1,33 @@
+- name: Creating a folder, copying a file, and running it on all hosts
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Create a directory in the remote hosts
+      file:
+        path: /tmp/app-files
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: "0755"
+
+    - name: Copy the file from the master node
+      copy:
+        src: /etc/test.sh
+        dest: /tmp/app-files/test.sh
+        owner: ansible
+        group: ansible
+        mode: "0755"
+        backup: yes
+
+    - name: Execute the script and store logs
+      shell: "/tmp/app-files/test.sh > /tmp/app-files/script.log 2>&1"
+      tags:
+        - execute
+        - script
+
+    - name: Fetch logs from remote hosts to master node
+      fetch:
+        src: /tmp/app-files/script.log
+        dest: /tmp/ansible-logs/{{ inventory_hostname }}-script.log
+        flat: yes
