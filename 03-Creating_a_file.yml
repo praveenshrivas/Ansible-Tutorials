@@ -19,3 +19,6 @@
         owner: praveen
         group: praveen
         mode: "0644"  # Standard file permissions
+
+# ansible-playbook site.yml --syntax-check
+# ansible-playbook -i inventory playbook.yml --check
